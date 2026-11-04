@@ -1,0 +1,71 @@
+{
+  "project": "atlas-understory-3d-sample-v1",
+  "topic": "The Lighthouse Ring Found in Alexandria's Sunken Palace",
+  "aspect": "16:9",
+  "fps": 25,
+  "audio_path": "../../atlas-understory/sample/voiceover.mp3",
+  "captions": true,
+  "status": "Short visual sample for style review; not full production",
+  "beats": [
+    {
+      "id": "A01",
+      "title_en": "LIGHT THROUGH WATER",
+      "kicker": "THE REPORTED FIND",
+      "dur": 6.5533,
+      "keyframe_path": "/home/user/vox-director/projects/atlas-understory-3d/anchors/A01_water-column.png",
+      "narration": "Alexandria’s lighthouse appears on a bronze ring, according to its excavators.",
+      "visual_guardrails": "abstract underwater atmosphere only; not field evidence",
+      "clip_path": "/home/user/vox-director/projects/atlas-understory-3d/sample/clips/clip_A01.mp4"
+    },
+    {
+      "id": "A02",
+      "title_en": "NATURAL SEABED",
+      "kicker": "THE OPEN QUESTION",
+      "dur": 6.5533,
+      "keyframe_path": "/home/user/vox-director/projects/atlas-understory-3d/anchors/A02_natural-seabed.png",
+      "narration": "They found it at a submerged palace. But does a lighthouse image identify a lighthouse official?",
+      "visual_guardrails": "generic natural geology only; no archaeological site or findspot",
+      "clip_path": "/home/user/vox-director/projects/atlas-understory-3d/sample/clips/clip_A02.mp4"
+    },
+    {
+      "id": "A03",
+      "title_en": "UNFORMED BRONZE MATERIAL",
+      "kicker": "THE TEAM'S INTERPRETATION",
+      "dur": 6.5533,
+      "keyframe_path": "/home/user/vox-director/projects/atlas-understory-3d/anchors/A03_bronze-material.png",
+      "narration": "That is the connection proposed by the excavation team.",
+      "visual_guardrails": "unformed material texture only; not a depiction of the reported ring",
+      "clip_path": "/home/user/vox-director/projects/atlas-understory-3d/sample/clips/clip_A03.mp4"
+    },
+    {
+      "id": "A04",
+      "title_en": "UNMARKED CLAY MATERIAL",
+      "kicker": "KEEP THE CLAIMS SEPARATE",
+      "dur": 6.5533,
+      "keyframe_path": "/home/user/vox-director/projects/atlas-understory-3d/anchors/A04_unmarked-clay.png",
+      "narration": "If it holds, a portable object could help explain a palace’s later use. The picture alone cannot settle that connection.",
+      "visual_guardrails": "plain unmarked clay material only; not an artifact or source document",
+      "clip_path": "/home/user/vox-director/projects/atlas-understory-3d/sample/clips/clip_A04.mp4"
+    },
+    {
+      "id": "A05",
+      "title_en": "ABSTRACT DARK SPACE",
+      "kicker": "ANNOUNCEMENT · OCTOBER 7, 2026",
+      "dur": 6.5533,
+      "keyframe_path": "/home/user/vox-director/projects/atlas-understory-3d/anchors/A05_abstract-dark-space.png",
+      "narration": "On October seventh, twenty twenty-six, the team announced the find from Antirhodos.",
+      "visual_guardrails": "abstract atmosphere only; not a museum, palace, findspot, or historic location",
+      "clip_path": "/home/user/vox-director/projects/atlas-understory-3d/sample/clips/clip_A05.mp4"
+    },
+    {
+      "id": "A06",
+      "title_en": "WATER AND SEDIMENT",
+      "kicker": "EVIDENCE BOUNDARY",
+      "dur": 6.5533,
+      "keyframe_path": "/home/user/vox-director/projects/atlas-understory-3d/anchors/A06_water-sediment.png",
+      "narration": "This submerged island belonged to Alexandria’s ancient royal quarter. The announcement calls the object a bronze ring-signet.",
+      "visual_guardrails": "natural water and sand only; not archaeological evidence",
+      "clip_path": "/home/user/vox-director/projects/atlas-understory-3d/sample/clips/clip_A06.mp4"
+    }
+  ]
+}

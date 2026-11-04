@@ -256,3 +256,65 @@ def compose_keyframe_prompt(era: str, scene: str, title_cn: str, title_en: str,
         f"{base} SCENE: {scene}. Arrange the composition with one clear focal subject "
         f"and strong editorial poster balance. {title} Aspect ratio {aspect}."
     )
+
+
+CINEMATIC_3D_BASE = (
+    "Premium cinematic 3D documentary visualization, built as a carefully art-directed "
+    "physically based render with convincing scale, material response, atmospheric depth, "
+    "fine environmental detail, restrained film grain, and realistic global illumination. "
+    "Deep teal and midnight-navy shadows, cool blue-green ambient fill, volumetric light "
+    "shafts where motivated, and restrained amber highlights. Serious editorial tone, "
+    "controlled contrast, naturalistic lens and focus falloff; polished feature-documentary "
+    "VFX craft, not a game screenshot, not a glossy product ad, not a flat illustration."
+)
+
+
+def compose_cinematic_3d_prompt(scene, aspect="16:9", palette=None, lighting=None,
+                                framing=None, visual_guardrails=None):
+    """Build a clean cinematic 3D plate prompt for the parallel non-collage workflow.
+
+    Text is deliberately excluded from generated plates so it can be typeset sharply in
+    post. `visual_guardrails` carries beat-specific evidence boundaries (e.g. do not
+    reconstruct the reported ring or imply a real excavation record).
+    """
+    palette = palette or "deep teal/navy, cool oceanic fill, tiny controlled amber accents"
+    lighting = lighting or "soft volumetric shafts with a restrained warm rim light"
+    framing = framing or "wide editorial composition with a single readable focal plane"
+    guard = (" Documentary-illustrative only; make no claim to be a source photograph, an "
+             "archaeological record, or a verified reconstruction."
+             if not visual_guardrails else f" Visual boundaries: {visual_guardrails}")
+    return (
+        f"{CINEMATIC_3D_BASE} SCENE: {scene}. FRAMING: {framing}. "
+        f"LIGHTING: {lighting}. PALETTE: {palette}. "
+        "Compose as a clean cinematic image plate with intentional negative space for "
+        "separately typeset editorial graphics. No visible text, letters, labels, logos, "
+        "watermarks, UI, collage, torn paper, tape, halftone, or poster typography. "
+        f"{guard} Aspect ratio {aspect}."
+    )
+
+
+def compose_cinematic_collage_prompt(scene, aspect="16:9", palette=None, lighting=None,
+                                     framing=None, visual_guardrails=None):
+    """Compose a Vox editorial paper-board with a dominant cinematic 3D image cut-out."""
+    palette = palette or "deep navy and teal, aged cream paper, restrained bronze accents"
+    lighting = lighting or "cinematic volumetric light in the image plate, soft shadows between paper layers"
+    framing = framing or "wide feature-documentary focal image with balanced editorial margins"
+    guard = visual_guardrails or (
+        "illustrative only, not field evidence; no actual artifact, site plan, or verified reconstruction")
+    return (
+        "A premium Vox-style editorial documentary keyframe, a tactile paper-collage board "
+        "photographed straight-on with physically layered depth. The dominant hero is a "
+        "cinematic, physically based 3D documentary image printed as a photographic cut-out "
+        "with realistic volumetric lighting, fine material detail, and a soft drop shadow. "
+        f"SCENE: {scene}. FRAMING: {framing}. LIGHTING: {lighting}. PALETTE: {palette}. "
+        "Surround and overlap the hero image with a few restrained physical editorial layers: "
+        "torn cream paper, dark navy printed-paper fields, cropped abstract non-locatable map "
+        "or document fragments, one small blank annotation card, discreet translucent tape, "
+        "decorative brass pushpins, and a thin red thread. Visible paper fibers, crisp torn "
+        "edges, believable paper relief and careful shadows. The 3D image remains the clear "
+        "focal subject; keep the layout sophisticated and uncluttered with negative space for "
+        "separately typeset captions. No legible text, numbers, coordinates, logos, watermark, "
+        "UI, or fabricated source labels. Do not flatten the composition into a slide and do "
+        "not turn the whole frame into a plain CGI environment. "
+        f"Evidence boundary: {guard}. Aspect ratio {aspect}."
+    )

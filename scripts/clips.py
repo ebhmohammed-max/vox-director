@@ -99,6 +99,78 @@ def painterly_prompt(motion):
             f"Gentle, cinematic, no morphing, no new objects.")
 
 
+CINEMATIC_CAMERA = {
+    "static": "locked-off tripod camera",
+    "push_in": "slow stabilized dolly forward toward the focal subject",
+    "pull_out": "slow stabilized dolly backward, revealing more of the environment",
+    "pan": "slow controlled lateral camera pan",
+    "tilt": "slow controlled vertical camera tilt",
+    "orbit": "subtle short 3D camera arc around the focal subject, preserving its shape",
+    "crane": "slow crane rise that reveals spatial depth",
+    "tracking": "smooth lateral tracking move with natural parallax",
+    "macro_push": "slow macro lens push-in with a controlled rack focus",
+}
+
+
+def cinematic_3d_prompt(camera, element_motion=None, feel=None, palette=None,
+                        amplitude="calm", visual_guardrails=None):
+    """Motion prompt for high-end cinematic 3D documentary plates (not collage)."""
+    cam = CINEMATIC_CAMERA.get(camera, camera)
+    motion = element_motion or (
+        "only physically plausible environmental motion: fine suspended particles drift, "
+        "light shifts gently through the atmosphere, and the focal subject remains stable")
+    amp = {"calm": "very restrained", "punchy": "measured and clearly visible",
+           "max": "bold but physically coherent"}.get(amplitude, "very restrained")
+    feel = feel or "serious, investigative, cinematic documentary"
+    palette = palette or "preserve the still's deep teal/navy grade and restrained warm highlights"
+    guard = visual_guardrails or (
+        "do not invent documentary evidence, recognizable archaeological features, inscriptions, "
+        "or an exact location")
+    return (
+        "Animate this supplied cinematic 3D documentary plate as one continuous shot. "
+        f"CAMERA: {cam}. MOTION: {motion}. Amplitude: {amp}. "
+        f"FEEL: {feel}. COLOR: {palette}. "
+        "Maintain physically consistent geometry, scale, material, lighting direction, and "
+        "composition; allow only natural motion and restrained atmospheric change. "
+        "No cuts, no camera reset, no morphing, no melting, no invented objects, no text or "
+        "logos. Preserve the rendered image's specific visual boundaries. "
+        f"Visual boundaries: {guard}."
+    )
+
+
+def cinematic_collage_prompt(camera, element_motion=None, feel=None, palette=None,
+                             amplitude="calm", visual_guardrails=None):
+    """Animate a layered editorial board while preserving its cinematic 3D cut-out."""
+    cams = {
+        "static": "a locked-off camera with gentle depth breathing only",
+        "push_in": "one slow, stabilized push toward the 3D image cut-out",
+        "pull_out": "one slow pull-back revealing the assembled paper board",
+        "pan": "one slow lateral move across the collage board",
+        "tilt": "one slow vertical camera drift across the board",
+        "parallax": "subtle multi-plane parallax, each paper layer moving at a distinct shallow depth",
+    }
+    cam = cams.get(camera, camera)
+    motion = element_motion or (
+        "fine particles move only inside the cinematic image cut-out; paper, tape, pins, "
+        "map scraps and red thread remain physically attached and nearly still")
+    amp = {"calm": "subtle and controlled", "punchy": "clear but restrained",
+           "max": "energetic yet physically coherent"}.get(amplitude, "subtle and controlled")
+    feel = feel or "investigative, premium editorial documentary"
+    palette = palette or "preserve the still's deep teal/navy, cream paper and restrained red accents"
+    guard = visual_guardrails or (
+        "do not invent evidence, locations, readable labels, inscriptions, artifacts or new objects")
+    return (
+        "Animate this supplied Vox-style editorial paper-collage keyframe as one continuous "
+        f"shot. CAMERA: {cam}. LAYER MOTION: {motion}. Amplitude: {amp}. "
+        f"FEEL: {feel}. COLOR: {palette}. Keep the 3D photographic cut-out coherent and "
+        "physically realistic; allow gentle parallax between its image plane and the paper "
+        "map/document scraps. Preserve torn edges, pins, tape, red thread, layout, and all "
+        "graphic details; no new marks or legible text. No cuts, resets, melting, morphing, "
+        "object emergence, or invented visual details. "
+        f"Evidence boundary: {guard}."
+    )
+
+
 def run(project_dir, only=None):
     bpath = os.path.join(project_dir, "beats.json")
     with open(bpath) as f:
@@ -155,6 +227,22 @@ def run(project_dir, only=None):
                                         palette=beat.get("bg"), amplitude=motion_style,
                                         anchor_freeze=doc.get("anchor_freeze"),
                                         has_title=shot.get("title", True), constraints=constraints)
+            elif style == "cinematic_3d":
+                visual = doc.get("cinematic_visual_language", {})
+                prompt = cinematic_3d_prompt(
+                    camera, element_motion=shot.get("element_motion"),
+                    feel=beat.get("feel"),
+                    palette=shot.get("palette", visual.get("palette")),
+                    amplitude=motion_style,
+                    visual_guardrails=shot.get("visual_guardrails"))
+            elif style == "cinematic_collage":
+                visual = doc.get("cinematic_visual_language", {})
+                prompt = cinematic_collage_prompt(
+                    camera, element_motion=shot.get("element_motion"),
+                    feel=beat.get("feel"),
+                    palette=shot.get("palette", visual.get("palette")),
+                    amplitude=motion_style,
+                    visual_guardrails=shot.get("visual_guardrails"))
             else:
                 prompt = painterly_prompt(shot.get("motion", camera))
             dur = int(shot.get("dur", 10))
