@@ -4,15 +4,17 @@ A fresh visual pass built to match the supplied screenshot: layered paper/map/do
 
 ## Sample video
 
-`sample/atlas_understory_3d_collage_sample_v1.mp4` is a 39.32-second, 1920×1080, 25 fps H.264 sample using all six anchors, the existing selected narration, paper-style caption cards, and fade-in/out. Motion uses Vox Director's local `scripts/kenburns.py` still-to-motion fallback (alternating slow push/pull), not an AI image-to-video service. The cut has no music and is a short visual proof, not the full documentary.
+`sample/atlas_understory_photo_stack_motion_sample_v2.mp4` is the current 39.32-second, 1920×1080, 24 fps sample. Each 3D image is isolated as its own printed photo card; cards fly in, scale/rotate, and settle into a layered stack. A red thread draws across the board while a needle pin travels to each new card and anchors it. Narration and editorial caption cards are included. This is a local layer-animation proof, not the full documentary; it has no music.
 
-Re-render from the repository root with Pillow and `ffmpeg` available:
+The earlier `atlas_understory_3d_collage_sample_v1.mp4` is superseded because it only moved whole frames.
+
+Re-render the stacked-card sample from the repository root with Pillow, DejaVu fonts, and `ffmpeg` available:
 
 ```bash
-python3 projects/atlas-understory-3d/sample/render_sample.py
+python3 projects/atlas-understory-3d/sample/animate_stack.py
 ```
 
-The runner calls `scripts/kenburns.py`, then assembles the clips, caption overlays, and narration. `sample/beats.json` documents the six beats and local image paths.
+The runner uses the repo's `scripts/motion.py` Layer/easing engine for independent card motion, then locally encodes and muxes narration. `sample/beats.json` and `sample/animate_stack.py` document the animation timings and inputs.
 
 ## Current review gate
 
