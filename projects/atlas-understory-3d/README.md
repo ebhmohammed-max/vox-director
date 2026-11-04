@@ -1,25 +1,29 @@
-# Atlas Understory — cinematic 3D production lane
+# Atlas Understory — cinematic editorial-collage sample
 
-This is a **fresh** Vox Director production path for the user's cinematic 3D reference—not a continuation of the rejected paper-collage sample. It uses the repo's native `keyframes.py` and `clips.py` stages with a new `style: "cinematic_3d"` prompt lane. The image treatment is high-end, physically based 3D documentary visualization with deep teal/navy shadows, motivated volumetric light, restrained warm highlights, realistic materials, and deliberate editorial composition. It explicitly avoids collage, torn paper, halftone, and baked-in text.
+A fresh visual pass built to match the supplied screenshot: layered paper/map/document elements around a dominant cinematic 3D image cut-out. The six Batch 0 anchors are generated and stored in `anchors/`. Each is 1672×941 (16:9) and avoids depicting the reported ring, museum objects, the actual palace plan, an exact findspot, or archaeological records.
 
-## Current gate: Batch 0 anchors only
+## Sample video
 
-`beats.json` contains six anonymous environment/material anchors and no EDIT derivatives. Create and review these six images first. Do not create dependent full-film images until the user has reviewed the six actual generated anchor images. Each anchor is explicitly illustrative, not a site plan, findspot, artifact reconstruction, or field record.
+`sample/atlas_understory_3d_collage_sample_v1.mp4` is a 39.32-second, 1920×1080, 25 fps H.264 sample using all six anchors, the existing selected narration, paper-style caption cards, and fade-in/out. Motion uses Vox Director's local `scripts/kenburns.py` still-to-motion fallback (alternating slow push/pull), not an AI image-to-video service. The cut has no music and is a short visual proof, not the full documentary.
 
-## Run when the repo's provider is available
+Re-render from the repository root with Pillow and `ffmpeg` available:
 
 ```bash
-python3 scripts/keyframes.py projects/atlas-understory-3d
+python3 projects/atlas-understory-3d/sample/render_sample.py
 ```
 
-The repo's image stage uses Atlas Cloud's `google/nano-banana-2/text-to-image` model (2K, 16:9). For animation later, the cinematic lane is implemented in `scripts/clips.py`; the 3D motion stage must wait until anchor approval and a production beat map. Final assembly also needs local `ffmpeg` and `ffprobe`.
+The runner calls `scripts/kenburns.py`, then assembles the clips, caption overlays, and narration. `sample/beats.json` documents the six beats and local image paths.
+
+## Current review gate
+
+These six anonymous anchor images are for visual review. Do not create dependent full-film EDIT images until the user approves the look. After that gate, the full shot plan and assets can be built and animated in the same visual language. The existing long-form research/corroboration and oral-read signoff remain open.
 
 ## Evidence boundaries
 
-- No depiction of the actual ring, its engraving, museum objects, exact findspot, palace plan, excavation, or historical people as documentary evidence.
-- No generated map, archaeological plan, invented inscription, or object detail that could be mistaken for the source record.
-- Independent field corroboration and oral-read signoff remain open.
+- No depiction of the actual ring or engraving, museum objects, exact findspot, palace plan, excavation, or historical people as documentary evidence.
+- Map fragments are abstract decorative paper, not a site plan or location record.
+- AI-generated environments/materials are illustrative atmosphere, not field evidence.
 
-## Runtime prerequisites
+## Repo rendering lanes
 
-The repo keyframe stage requires `ATLASCLOUD_API_KEY`, Python dependencies, and access to the Atlas Cloud API. The current workspace does not have the key or Atlas Cloud network access, so the render command is prepared but cannot yet produce image files here. Do not substitute procedural mockups for the requested production-quality 3D images.
+`style: "cinematic_collage"` in `beats.json` selects the repository's combined 3D-image + layered-editorial-collage prompt path. The local review sample uses `scripts/kenburns.py`. The more generative `scripts/clips.py` path requires the configured Atlas Cloud video provider; no such API call was used for this sample.

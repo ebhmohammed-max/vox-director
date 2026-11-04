@@ -15,7 +15,8 @@ import sys
 
 from provider import get_provider, run_jobs
 from styles import (compose_keyframe_prompt, compose_collage_prompt,
-                    compose_cinematic_3d_prompt, resolve_theme, image_params)
+                    compose_cinematic_3d_prompt, compose_cinematic_collage_prompt,
+                    resolve_theme, image_params)
 
 IMAGE_MODEL = "google/nano-banana-2/text-to-image"
 
@@ -53,7 +54,8 @@ def run(project_dir):
         for shot, key in shots_of(beat):
             if shot.get("kind") == "host":      # presenter shots use host_plates.py
                 continue
-            if shot.get("keyframe_url"):        # already generated (e.g. reused wide) -> skip
+            if shot.get("keyframe_url") or (shot.get("keyframe_path") and os.path.exists(shot["keyframe_path"])):
+                # Preserve already generated or user-supplied local keyframes.
                 continue
             scene = shot["scene"]
             if style == "collage":
@@ -66,6 +68,14 @@ def run(project_dir):
             elif style == "cinematic_3d":
                 visual = doc.get("cinematic_visual_language", {})
                 prompt = compose_cinematic_3d_prompt(
+                    scene, aspect=aspect,
+                    palette=shot.get("palette", visual.get("palette")),
+                    lighting=shot.get("lighting", visual.get("lighting")),
+                    framing=shot.get("framing"),
+                    visual_guardrails=shot.get("visual_guardrails"))
+            elif style == "cinematic_collage":
+                visual = doc.get("cinematic_visual_language", {})
+                prompt = compose_cinematic_collage_prompt(
                     scene, aspect=aspect,
                     palette=shot.get("palette", visual.get("palette")),
                     lighting=shot.get("lighting", visual.get("lighting")),

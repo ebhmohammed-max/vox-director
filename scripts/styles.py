@@ -291,3 +291,30 @@ def compose_cinematic_3d_prompt(scene, aspect="16:9", palette=None, lighting=Non
         "watermarks, UI, collage, torn paper, tape, halftone, or poster typography. "
         f"{guard} Aspect ratio {aspect}."
     )
+
+
+def compose_cinematic_collage_prompt(scene, aspect="16:9", palette=None, lighting=None,
+                                     framing=None, visual_guardrails=None):
+    """Compose a Vox editorial paper-board with a dominant cinematic 3D image cut-out."""
+    palette = palette or "deep navy and teal, aged cream paper, restrained bronze accents"
+    lighting = lighting or "cinematic volumetric light in the image plate, soft shadows between paper layers"
+    framing = framing or "wide feature-documentary focal image with balanced editorial margins"
+    guard = visual_guardrails or (
+        "illustrative only, not field evidence; no actual artifact, site plan, or verified reconstruction")
+    return (
+        "A premium Vox-style editorial documentary keyframe, a tactile paper-collage board "
+        "photographed straight-on with physically layered depth. The dominant hero is a "
+        "cinematic, physically based 3D documentary image printed as a photographic cut-out "
+        "with realistic volumetric lighting, fine material detail, and a soft drop shadow. "
+        f"SCENE: {scene}. FRAMING: {framing}. LIGHTING: {lighting}. PALETTE: {palette}. "
+        "Surround and overlap the hero image with a few restrained physical editorial layers: "
+        "torn cream paper, dark navy printed-paper fields, cropped abstract non-locatable map "
+        "or document fragments, one small blank annotation card, discreet translucent tape, "
+        "decorative brass pushpins, and a thin red thread. Visible paper fibers, crisp torn "
+        "edges, believable paper relief and careful shadows. The 3D image remains the clear "
+        "focal subject; keep the layout sophisticated and uncluttered with negative space for "
+        "separately typeset captions. No legible text, numbers, coordinates, logos, watermark, "
+        "UI, or fabricated source labels. Do not flatten the composition into a slide and do "
+        "not turn the whole frame into a plain CGI environment. "
+        f"Evidence boundary: {guard}. Aspect ratio {aspect}."
+    )

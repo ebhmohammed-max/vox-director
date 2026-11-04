@@ -1,6 +1,10 @@
 # generated video projects (data output, not source) — can be hundreds of MB
 out/
 
+# transient per-shot encodes and temporary composites for Atlas Understory review cut
+projects/atlas-understory-3d/sample/clips/
+projects/atlas-understory-3d/sample/_render/
+
 # python
 __pycache__/
 *.py[cod]
