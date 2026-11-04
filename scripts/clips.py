@@ -99,6 +99,45 @@ def painterly_prompt(motion):
             f"Gentle, cinematic, no morphing, no new objects.")
 
 
+CINEMATIC_CAMERA = {
+    "static": "locked-off tripod camera",
+    "push_in": "slow stabilized dolly forward toward the focal subject",
+    "pull_out": "slow stabilized dolly backward, revealing more of the environment",
+    "pan": "slow controlled lateral camera pan",
+    "tilt": "slow controlled vertical camera tilt",
+    "orbit": "subtle short 3D camera arc around the focal subject, preserving its shape",
+    "crane": "slow crane rise that reveals spatial depth",
+    "tracking": "smooth lateral tracking move with natural parallax",
+    "macro_push": "slow macro lens push-in with a controlled rack focus",
+}
+
+
+def cinematic_3d_prompt(camera, element_motion=None, feel=None, palette=None,
+                        amplitude="calm", visual_guardrails=None):
+    """Motion prompt for high-end cinematic 3D documentary plates (not collage)."""
+    cam = CINEMATIC_CAMERA.get(camera, camera)
+    motion = element_motion or (
+        "only physically plausible environmental motion: fine suspended particles drift, "
+        "light shifts gently through the atmosphere, and the focal subject remains stable")
+    amp = {"calm": "very restrained", "punchy": "measured and clearly visible",
+           "max": "bold but physically coherent"}.get(amplitude, "very restrained")
+    feel = feel or "serious, investigative, cinematic documentary"
+    palette = palette or "preserve the still's deep teal/navy grade and restrained warm highlights"
+    guard = visual_guardrails or (
+        "do not invent documentary evidence, recognizable archaeological features, inscriptions, "
+        "or an exact location")
+    return (
+        "Animate this supplied cinematic 3D documentary plate as one continuous shot. "
+        f"CAMERA: {cam}. MOTION: {motion}. Amplitude: {amp}. "
+        f"FEEL: {feel}. COLOR: {palette}. "
+        "Maintain physically consistent geometry, scale, material, lighting direction, and "
+        "composition; allow only natural motion and restrained atmospheric change. "
+        "No cuts, no camera reset, no morphing, no melting, no invented objects, no text or "
+        "logos. Preserve the rendered image's specific visual boundaries. "
+        f"Visual boundaries: {guard}."
+    )
+
+
 def run(project_dir, only=None):
     bpath = os.path.join(project_dir, "beats.json")
     with open(bpath) as f:
@@ -155,6 +194,14 @@ def run(project_dir, only=None):
                                         palette=beat.get("bg"), amplitude=motion_style,
                                         anchor_freeze=doc.get("anchor_freeze"),
                                         has_title=shot.get("title", True), constraints=constraints)
+            elif style == "cinematic_3d":
+                visual = doc.get("cinematic_visual_language", {})
+                prompt = cinematic_3d_prompt(
+                    camera, element_motion=shot.get("element_motion"),
+                    feel=beat.get("feel"),
+                    palette=shot.get("palette", visual.get("palette")),
+                    amplitude=motion_style,
+                    visual_guardrails=shot.get("visual_guardrails"))
             else:
                 prompt = painterly_prompt(shot.get("motion", camera))
             dur = int(shot.get("dur", 10))

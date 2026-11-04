@@ -1,0 +1,65 @@
+{
+  "project": "atlas-understory-3d-batch0",
+  "topic": "The Lighthouse Ring Found in Alexandria's Sunken Palace — anonymous cinematic 3D anchor plates",
+  "language": "en",
+  "aspect": "16:9",
+  "style": "cinematic_3d",
+  "image_model": "google/nano-banana-2/text-to-image",
+  "image_resolution": "2k",
+  "cinematic_visual_language": {
+    "palette": "deep teal and midnight-navy shadows, cool blue-green ambient fill, subtle bronze and amber highlights only where motivated",
+    "lighting": "physically plausible cinematic global illumination; volumetric shafts in water scenes; controlled highlights; no synthetic glow bloom",
+    "framing": "feature-documentary 16:9 composition, strong natural depth, clear focal hierarchy, reserved negative space for separately typeset editorial graphics"
+  },
+  "status": "Batch 0 anchor review required; no dependent EDIT images authorized",
+  "beats": [
+    {
+      "id": "A01",
+      "title_en": "LIGHT THROUGH WATER",
+      "scene": "A vast empty underwater water column viewed at cinematic wide scale, layered blue-green depth, soft suspended particulate, several distinct volumetric sun shafts descending from the surface and fading into deep navy water. No seabed, no structures, no objects, no silhouettes.",
+      "framing": "wide establishing view, strong depth planes, brightest shafts off-center, generous quiet dark negative space",
+      "lighting": "cool top light refracted through water, subtle volumetric rays, soft falloff into navy shadow",
+      "visual_guardrails": "anonymous atmospheric water only; do not show an archaeological site, seabed, ruin, palace, artifact, ring, inscription, people, equipment, or a recognizable geographic location; this is not field evidence"
+    },
+    {
+      "id": "A02",
+      "title_en": "NATURAL SEABED",
+      "scene": "A generic natural underwater seabed with loose sediment, a few irregular unworked stones, and soft silt drifting near the bottom. Every shape is naturally eroded and non-architectural; no aligned blocks, cut stone, walls, columns, foundations, or manufactured objects.",
+      "framing": "low oblique wide view grazing across the natural bottom, clear near-to-far scale and restrained focal point",
+      "lighting": "dim teal ambient water light with one faint cool shaft and gentle natural shadows",
+      "visual_guardrails": "generic natural geology only, not Antirhodos or any excavated site; no masonry, palace, findspot, ring, artifact, inscriptions, excavation equipment, people, or archaeological feature; not field evidence"
+    },
+    {
+      "id": "A03",
+      "title_en": "UNFORMED BRONZE MATERIAL",
+      "scene": "An abstract macro material study of unworked aged bronze patina: irregular color transitions between deep umber, muted green oxidation, and small subdued copper highlights on a continuous amorphous surface, without a boundary that suggests an object.",
+      "framing": "extreme close-up, shallow depth of field, tactile surface detail, no complete silhouette or recognizable manufactured form",
+      "lighting": "a narrow warm grazing highlight against cool teal-black falloff, no polished jewelry sparkle",
+      "visual_guardrails": "unformed material texture only; absolutely no ring, jewelry, bulla, coin, artifact silhouette, engraving, mark, lettering, museum display, or reconstruction; not a representation of the reported object"
+    },
+    {
+      "id": "A04",
+      "title_en": "UNMARKED CLAY MATERIAL",
+      "scene": "A quiet macro study of raw unmarked clay with natural cracks, compressed grains, and soft ochre-brown tonal variation; the surface remains irregular and unformed, without tablet edges or a seal impression.",
+      "framing": "close editorial material shot, tactile microtexture in focus with background gently falling away",
+      "lighting": "restrained warm side light across the clay against a deep cool shadow, realistic roughness and diffuse bounce",
+      "visual_guardrails": "plain clay material only; no tablet, bulla, seal, imprint, lettering, symbol, museum object, historical person, or source-object reconstruction; not evidence from Alexandria"
+    },
+    {
+      "id": "A05",
+      "title_en": "ABSTRACT DARK SPACE",
+      "scene": "A minimal abstract field of deep navy and teal atmosphere with a soft horizontal gradient and a faint pool of controlled light, designed as a neutral visual transition plate; no visible display furniture, case, pedestal, wall, room, or object.",
+      "framing": "simple wide negative-space composition, stable center, subtle depth from atmosphere rather than architecture",
+      "lighting": "low-key softbox-like ambience with a restrained warm edge far from the focal center",
+      "visual_guardrails": "pure abstract atmosphere only; do not imply a museum, excavation chamber, underwater location, palace, evidence display, artifact, ring, inscription, or historical setting"
+    },
+    {
+      "id": "A06",
+      "title_en": "WATER AND SEDIMENT",
+      "scene": "A natural underwater transition where fine suspended sediment drifts above softly rippled sand, with broad, low-contrast wave patterns and no distinct strata, cut surfaces, walls, or disturbed excavation trench.",
+      "framing": "wide oblique view of natural ripples crossing the lower frame, subtle atmospheric distance, balanced open negative space",
+      "lighting": "cool teal underwater ambience, delicate light shafts fading across suspended particles, no dramatic pinpoint spotlight",
+      "visual_guardrails": "natural water and undisturbed-looking sand only; do not depict archaeological stratigraphy, a trench, findspot, palace, artifact, ring, people, equipment, or documentary survey data; not field evidence"
+    }
+  ]
+}

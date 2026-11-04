@@ -256,3 +256,38 @@ def compose_keyframe_prompt(era: str, scene: str, title_cn: str, title_en: str,
         f"{base} SCENE: {scene}. Arrange the composition with one clear focal subject "
         f"and strong editorial poster balance. {title} Aspect ratio {aspect}."
     )
+
+
+CINEMATIC_3D_BASE = (
+    "Premium cinematic 3D documentary visualization, built as a carefully art-directed "
+    "physically based render with convincing scale, material response, atmospheric depth, "
+    "fine environmental detail, restrained film grain, and realistic global illumination. "
+    "Deep teal and midnight-navy shadows, cool blue-green ambient fill, volumetric light "
+    "shafts where motivated, and restrained amber highlights. Serious editorial tone, "
+    "controlled contrast, naturalistic lens and focus falloff; polished feature-documentary "
+    "VFX craft, not a game screenshot, not a glossy product ad, not a flat illustration."
+)
+
+
+def compose_cinematic_3d_prompt(scene, aspect="16:9", palette=None, lighting=None,
+                                framing=None, visual_guardrails=None):
+    """Build a clean cinematic 3D plate prompt for the parallel non-collage workflow.
+
+    Text is deliberately excluded from generated plates so it can be typeset sharply in
+    post. `visual_guardrails` carries beat-specific evidence boundaries (e.g. do not
+    reconstruct the reported ring or imply a real excavation record).
+    """
+    palette = palette or "deep teal/navy, cool oceanic fill, tiny controlled amber accents"
+    lighting = lighting or "soft volumetric shafts with a restrained warm rim light"
+    framing = framing or "wide editorial composition with a single readable focal plane"
+    guard = (" Documentary-illustrative only; make no claim to be a source photograph, an "
+             "archaeological record, or a verified reconstruction."
+             if not visual_guardrails else f" Visual boundaries: {visual_guardrails}")
+    return (
+        f"{CINEMATIC_3D_BASE} SCENE: {scene}. FRAMING: {framing}. "
+        f"LIGHTING: {lighting}. PALETTE: {palette}. "
+        "Compose as a clean cinematic image plate with intentional negative space for "
+        "separately typeset editorial graphics. No visible text, letters, labels, logos, "
+        "watermarks, UI, collage, torn paper, tape, halftone, or poster typography. "
+        f"{guard} Aspect ratio {aspect}."
+    )
